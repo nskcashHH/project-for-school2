@@ -56,6 +56,17 @@ open class MainActivity {
         val element4 = androidDriver.findElement(AppiumBy.accessibilityId("Самовывоз"))
         element4.sendKeys(text)
 
+        /*
+        аналог try catch
+         */
+        runCatching {
+
+        }.onFailure {
+
+        }.onSuccess {
+
+        }
+
 
     }
 
