@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite for Android">
+    <parameter name="paramPlatformName" value="ANDROID"/>
+    <parameter name="paramPlatformVersion" value="14"/>
+    <parameter name="paramDeviceName" value="Pixel 6 Pro API 34"/>
+    <parameter name="paramUDID" value=""/>
+    <parameter name="paramTimeToSearchElement" value="6"/>
+    <parameter name="paramPathToApp" value="/Users/aleksejbulygin/apps/starter/app-profile.apk"/>
+    <test verbose="2" preserve-order="true" name="Android tests" parallel="none">
+        <classes>
+            <class name="tests.TestClassOne"/>
+            <class name="tests.TestClassOne">
+                <methods>
+                    <include name="testOne"/>
+                    <include name="testOne"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

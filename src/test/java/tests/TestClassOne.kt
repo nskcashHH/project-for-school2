@@ -14,6 +14,8 @@ class TestClassOne : MainActivity(){
         // вызов функции needAuth = true
         println("Тест запущен")
         TimeUnit.SECONDS.sleep(10)
+        val test: String = "1234"
+        test[0]
     }
 
 }

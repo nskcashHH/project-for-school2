@@ -1,18 +1,15 @@
 import GlobalVariables.androidDriver
+import GlobalVariables.iosDriver
+import GlobalVariables.platformType
 import TestFunctions.clickToElement
-import TestFunctions.sendText
 import io.appium.java_client.AppiumBy
 import io.appium.java_client.android.AndroidDriver
+import io.appium.java_client.ios.IOSDriver
 import io.appium.java_client.remote.AndroidMobileCapabilityType
+import io.appium.java_client.remote.IOSMobileCapabilityType
 import io.appium.java_client.remote.MobileCapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
-import org.testng.annotations.AfterClass
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.AfterSuite
-import org.testng.annotations.BeforeClass
-import org.testng.annotations.BeforeMethod
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.Test
+import org.testng.annotations.*
 import screens.Onboarding.nextButton
 import screens.Onboarding.selectRusButton
 import java.net.URL
@@ -22,34 +19,58 @@ import java.util.concurrent.TimeUnit
 open class MainActivity {
 
     @BeforeSuite
-    fun installDriver() {
+    @Parameters(
+        value = ["paramPlatformName", "paramPlatformVersion", "paramDeviceName",
+            "paramUDID", "paramTimeToSearchElement", "paramPathToApp"]
+    )
+    fun installDriver(
+        paramPlatformName: TypeOS, paramPlatformVersion: String,
+        paramDeviceName: String, paramUDID: String,
+        paramTimeToSearchElement: Long, paramPathToApp: String
+    ) {
 
         val capabilities = DesiredCapabilities()
 
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
-        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "14.0")
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel 6 Pro API 34")
-        capabilities.setCapability(MobileCapabilityType.APP, "/Users/aleksejbulygin/apps/starter/app-profile.apk")
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, paramPlatformName)
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, paramPlatformVersion)
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, paramDeviceName)
+        capabilities.setCapability(MobileCapabilityType.APP, paramPathToApp)
         capabilities.setCapability(MobileCapabilityType.NO_RESET, true)
-        //   capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "starter.school.client")
-        //  capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "starter.school.client.MainActivity")
+
+        if (paramPlatformName == TypeOS.ANDROID) {
+            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
+            capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "starter.school.client")
+            capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, "starter.school.client.MainActivity")
+        } else {
+            capabilities.setCapability(IOSMobileCapabilityType.WDA_LAUNCH_TIMEOUT, 80000)
+            capabilities.setCapability(IOSMobileCapabilityType.COMMAND_TIMEOUTS, 50000)
+            capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest")
+        }
+
 
         val url = URL("http://127.0.0.1:4723/")
 
-        androidDriver = AndroidDriver(url, capabilities)
+        if (paramPlatformName == TypeOS.IOS){
+            iosDriver = IOSDriver(url, capabilities)
+        } else androidDriver = AndroidDriver(url, capabilities)
 
-        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5))
+        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(paramTimeToSearchElement))
 
-        /* !!!! По-хорошему, нужно, чтобы в этой аннотации осталась только инициализация драйвера
-            лучше вывести эти действия в отельный сценарий, чтобы и тут ее вызвать
-         */
+        platformType = paramPlatformName
 
-        clickToElement(selectRusButton.androidXpath, LocatorType.XPATH)
+
+
+
+        clickToElement(
+            locatorAndroid = selectRusButton.androidXpath,
+            locatorTypeAndroid = LocatorType.XPATH,
+            locatorIOS = "",
+            locatorTypeIOS = LocatorType.ID
+        )
         clickToElement(nextButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
 
         TimeUnit.SECONDS.sleep(5)
-        clickToElement(locator = "Самовывоз", locatorType = LocatorType.ACCESSIBILITY_ID)
+        clickToElement(locatorAndroid = "Самовывоз", locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID)
 
         val text = androidDriver.pageSource
 
