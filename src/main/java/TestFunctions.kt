@@ -42,30 +42,34 @@ object TestFunctions {
 
 
     private fun findElement(locator: String, locatorType: LocatorType): WebElement {
-        var element: WebElement
+        lateinit var element: WebElement
         when (locatorType) {
             LocatorType.ID -> {
                 if (platformType == TypeOS.ANDROID) {
                     element = androidDriver.findElement(AppiumBy.id(locator))
                 } else element = iosDriver.findElement(AppiumBy.id(locator))
             }
+
             LocatorType.XPATH -> {
                 if (platformType == TypeOS.ANDROID) {
-                    element= androidDriver.findElement(AppiumBy.xpath(locator))
+                    element = androidDriver.findElement(AppiumBy.xpath(locator))
                 } else element = iosDriver.findElement(AppiumBy.xpath(locator))
             }
+
             LocatorType.ACCESSIBILITY_ID -> {
                 if (platformType == TypeOS.ANDROID) {
                     element = androidDriver.findElement(AppiumBy.accessibilityId(locator))
                 } else element = iosDriver.findElement(AppiumBy.accessibilityId(locator))
             }
-            LocatorType.IOS_CLASS_CHAIN -> element=  iosDriver.findElement(AppiumBy.iOSClassChain(locator))
+
+            LocatorType.IOS_CLASS_CHAIN -> element = iosDriver.findElement(AppiumBy.iOSClassChain(locator))
             LocatorType.IOS_PREDICATE_STRING -> element = iosDriver.findElement(AppiumBy.iOSNsPredicateString(locator))
-            else -> element = iosDriver.findElement(AppiumBy.iOSNsPredicateString(locator))
-
+            else -> {}
         }
-        return element
 
+        return element
     }
 
+
 }
+
