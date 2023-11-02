@@ -10,8 +10,8 @@ import io.appium.java_client.remote.IOSMobileCapabilityType
 import io.appium.java_client.remote.MobileCapabilityType
 import org.openqa.selenium.remote.DesiredCapabilities
 import org.testng.annotations.*
-import screens.Onboarding.nextButton
-import screens.Onboarding.selectRusButton
+import screens.Onboarding
+
 import java.net.URL
 import java.time.Duration
 import java.util.concurrent.TimeUnit
@@ -60,17 +60,10 @@ open class MainActivity {
 
 
 
+        val onboarding = Onboarding() // объявляем экземпляр класса
+        onboarding.clickSelectRusButton() // делаем клик 1
+        onboarding.clickNextButton() // делаем клик 2
 
-        clickToElement(
-            locatorAndroid = selectRusButton.androidXpath,
-            locatorTypeAndroid = LocatorType.XPATH,
-            locatorIOS = "",
-            locatorTypeIOS = LocatorType.ID
-        )
-        clickToElement(nextButton.androidAccessibilityId, LocatorType.ACCESSIBILITY_ID)
-
-        TimeUnit.SECONDS.sleep(5)
-        clickToElement(locatorAndroid = "Самовывоз", locatorTypeAndroid = LocatorType.ACCESSIBILITY_ID)
 
         val text = androidDriver.pageSource
 

@@ -2,6 +2,7 @@ package tests
 
 import MainActivity
 import org.testng.annotations.Test
+import screens.Onboarding
 import java.util.concurrent.TimeUnit
 
 // запускать тесты именно через класс если все, или каждый тест по 1
@@ -11,11 +12,16 @@ class TestClassOne : MainActivity(){
     // не сможете запустить тесты сразу с нескольких классов
     @Test
     fun testOne(){
-        // вызов функции needAuth = true
-        println("Тест запущен")
-        TimeUnit.SECONDS.sleep(10)
-        val test: String = "1234"
-        test[0]
+
+        val onboarding = Onboarding() // объявляем экземпляр класса 1
+        val onboarding1 = Onboarding() // объявляем экземпляр класса 2
+
+
+        onboarding.clickSelectRusButton() // делаем клик 1
+        onboarding.clickNextButton() // делаем клик 2
+        onboarding.clickNextButton()
+        onboarding
+
     }
 
 }

@@ -10,7 +10,8 @@ object TestFunctions {
         locatorAndroid: String,
         locatorTypeAndroid: LocatorType,
         locatorIOS: String,
-        locatorTypeIOS: LocatorType
+        locatorTypeIOS: LocatorType,
+        elementName: String
     ) {
         val finalLocator: String
         val finalLocatorType: LocatorType
