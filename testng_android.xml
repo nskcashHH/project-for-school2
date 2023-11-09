@@ -6,7 +6,7 @@
     <parameter name="paramDeviceName" value="Pixel 6 Pro API 34"/>
     <parameter name="paramUDID" value=""/>
     <parameter name="paramTimeToSearchElement" value="6"/>
-    <parameter name="paramPathToApp" value="/Users/aleksejbulygin/apps/starter/app-profile.apk"/>
+    <parameter name="paramPathToApp" value="/Users/alekseybulygin/apps/starter/app-profile.apk"/>
     <test verbose="2" preserve-order="true" name="Android tests" parallel="none">
         <classes>
             <class name="tests.TestClassOne"/>

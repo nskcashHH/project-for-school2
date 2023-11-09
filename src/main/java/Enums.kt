@@ -11,3 +11,8 @@ enum class TypeOS {
     IOS,
     ANDROID
 }
+
+enum class ResponseType{
+    JSON,
+    HTML
+}

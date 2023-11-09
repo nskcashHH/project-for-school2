@@ -6,7 +6,7 @@
     <parameter name="paramDeviceName" value="iPhone 15"/>
     <parameter name="paramUDID" value=""/>
     <parameter name="paramTimeToSearchElement" value="6"/>
-    <parameter name="paramPathToApp" value="/Users/aleksejbulygin/apps/starter/Runner-intel.app"/>
+    <parameter name="paramPathToApp" value="/Users/alekseybulygin/apps/starter/Runner-intel.app"/>
     <test verbose="2" preserve-order="true" name="iOS Test" parallel="none">
         <classes>
             <class name="tests.TestClassOne"/>

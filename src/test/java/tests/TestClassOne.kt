@@ -1,6 +1,11 @@
 package tests
 
 import MainActivity
+import api_client.environment.Environment.environment
+import api_client.requests.categories.Categories
+import api_client.specifications.Specifications
+import api_client.specifications.Specifications.installSpecification
+import api_client.specifications.Specifications.requestSpec
 import org.testng.annotations.Test
 import screens.Onboarding
 import java.util.concurrent.TimeUnit
@@ -13,7 +18,7 @@ class TestClassOne : MainActivity(){
     @Test
     fun testOne(){
 
-        val onboarding = Onboarding() // объявляем экземпляр класса 1
+  /*      val onboarding = Onboarding() // объявляем экземпляр класса 1
         val onboarding1 = Onboarding() // объявляем экземпляр класса 2
 
 
@@ -21,6 +26,13 @@ class TestClassOne : MainActivity(){
         onboarding.clickNextButton() // делаем клик 2
         onboarding.clickNextButton()
         onboarding
+
+   */
+
+
+        installSpecification(requestSpec(environment.host))
+
+        Categories.get(mutableMapOf())
 
     }
 
