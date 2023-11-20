@@ -54,14 +54,18 @@ open class MainActivity {
             iosDriver = IOSDriver(url, capabilities)
         } else androidDriver = AndroidDriver(url, capabilities)
 
-        androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(paramTimeToSearchElement))
+     //   androidDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(paramTimeToSearchElement))
 
         platformType = paramPlatformName
 
 
 
         val onboarding = Onboarding() // объявляем экземпляр класса
-        onboarding.clickSelectRusButton() // делаем клик 1
+
+        runCatching {
+            onboarding.clickSelectRusButton(findElementWithoutCatching = true) // делаем клик 1
+        }
+
         onboarding.clickNextButton() // делаем клик 2
 
 

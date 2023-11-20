@@ -6,6 +6,7 @@ import api_client.requests.categories.Categories
 import api_client.specifications.Specifications
 import api_client.specifications.Specifications.installSpecification
 import api_client.specifications.Specifications.requestSpec
+import io.qameta.allure.Description
 import org.testng.annotations.Test
 import screens.Onboarding
 import java.util.concurrent.TimeUnit
@@ -15,7 +16,8 @@ class TestClassOne : MainActivity(){
 
     // пока что все тесты, которые у вас есть, реализуем именно в этом классе, пока что вы
     // не сможете запустить тесты сразу с нескольких классов
-    @Test
+    @Description("Описание для теста1")
+    @Test(description = "Описание для теста2")
     fun testOne(){
 
   /*      val onboarding = Onboarding() // объявляем экземпляр класса 1

@@ -6,13 +6,14 @@ import TestFunctions.clickToElement
 
 class Onboarding {
 
-    fun clickSelectRusButton() {
+    fun clickSelectRusButton(findElementWithoutCatching: Boolean = false) {
         clickToElement(
             locatorTypeAndroid = LocatorType.XPATH,
             locatorAndroid = locatorMap[OnboardingElements.SELECT_RUS_BUTTON_ANDROID].toString(),
             locatorTypeIOS = LocatorType.IOS_CLASS_CHAIN,
             locatorIOS = locatorMap[OnboardingElements.SELECT_RUS_BUTTON_IOS].toString(),
             elementName =  locatorMap[OnboardingElements.SELECT_RUS_BUTTON_ELEMENT_NAME].toString(),
+            findElementWithoutCatching = findElementWithoutCatching
         )
     }
 
